@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,26 +22,29 @@ public class ReservationForm {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	@JsonBackReference
 	private User user;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "hotel_id", nullable = false)
+	@JoinColumn(name = "hotel_id", nullable = false)
 	@JsonBackReference
 	private Hotel hotel;
-	
-	@Column
-	private Date reservation_date;
-	
-	@Column
-	private Date check_in_date;
-	
-	@Column
-	private Date check_out_date;
-	
+
+	@Column(name = "reservation_date")
+	@Temporal(TemporalType.DATE)
+	private Date reservationDate;
+
+	@Column(name = "check_in_date")
+	@Temporal(TemporalType.DATE)
+	private Date checkInDate;
+
+	@Column(name = "check_out_date")
+	@Temporal(TemporalType.DATE)
+	private Date checkOutDate;
+
 	@Column
 	private String comment;
 }

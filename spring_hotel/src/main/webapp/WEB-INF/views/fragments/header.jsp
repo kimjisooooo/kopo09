@@ -92,10 +92,10 @@
                             <a href='c_03' target='_self'>온천</a>
                         </div>
                         <div id='menu3' style='display: none;'>
-                            <a href='d_01' target='_blank'>예약상황</a> |
-                            <a href='d_01' target='_blank'>예약하기</a> |
-                            <a href='d_02' target='_blank'>관리자페이지</a> |
-                            <a href='d_03' target='_blank'>관리자로그아웃</a>
+                            <a href='d_01' target='_self'>예약상황</a> |
+                            <a href='d_01' target='_self'>예약하기</a> |
+                            <a href='d_02' target='_self'>관리자페이지</a> |
+                            <a href='d_03' target='_self'>관리자로그아웃</a>
                         </div>
                         <div id='menu4' style='display: none;'>
                             <a href='/sosick' target='_self'>리조트소식</a> |
