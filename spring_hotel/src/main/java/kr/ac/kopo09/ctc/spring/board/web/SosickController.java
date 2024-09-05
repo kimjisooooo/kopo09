@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sosick")
 public class SosickController {
 
     @Autowired
@@ -31,7 +30,9 @@ public class SosickController {
         int endPage = Math.min(startPage + sizePerPage - 1, totalPage);
         int nextPageGroup = page + sizePerPage;
         int prevPageGroup = page - sizePerPage;
-
+        System.out.println(totalPage);
+        System.out.println(nextPageGroup); 
+        System.out.println(endPage); 
         model.addAttribute("items", items);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPage", totalPage);
@@ -53,17 +54,17 @@ public class SosickController {
         return "/board/sosick_view";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/sosick/new")
     public String createForm(Model model) {
         model.addAttribute("sosickEntity", new Sosick());
-        return "/board/sosick_insert";
+        return "/sosick/new";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/sosick/new")
     public String create(@ModelAttribute Sosick sosickEntity, Model model) {
         if (sosickEntity.getTitle().isEmpty() || sosickEntity.getContent().isEmpty()) {
             model.addAttribute("errorMessage", "모든 필드를 입력해야 합니다.");
-            return "/board/sosick_insert";
+            return "/sosick/new";
         }
 
         sosickEntity.setDate(new Date());
@@ -97,7 +98,7 @@ public class SosickController {
     }
 
     @PostMapping("/comment/{sosickId}")
-    public String addComment(@PathVariable int sosickId, @RequestParam String content, @RequestParam String author) {
+    public String addComment(@PathVariable int sosickId, @RequestParam String content) {
         sosickService.addComment(sosickId, content);
         return "redirect:/sosick/view/" + sosickId;
     }

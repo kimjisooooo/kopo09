@@ -98,7 +98,7 @@
                             <a href='d_03' target='_self'>관리자로그아웃</a>
                         </div>
                         <div id='menu4' style='display: none;'>
-                            <a href='/sosick' target='_self'>리조트소식</a> |
+                            <a href='/list' target='_self'>리조트소식</a> |
                             <a href='/hoogi' target='_self'>이용후기</a>
                         </div>
                     </td>

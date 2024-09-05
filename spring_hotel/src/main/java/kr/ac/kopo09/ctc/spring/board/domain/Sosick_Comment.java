@@ -22,7 +22,6 @@ public class Sosick_Comment {
     private Sosick sosick;
 
     private String content;
-    private String author;
     private Date date;
     private int relevel;
     private int recnt;

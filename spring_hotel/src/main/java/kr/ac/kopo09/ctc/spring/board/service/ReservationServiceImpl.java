@@ -33,7 +33,7 @@ public class ReservationServiceImpl implements ReservationService {
             Map<Integer, String> roomStatus = new HashMap<>();
             
             // 모든 방 유형에 대해 기본값 "예약가능"으로 설정
-            roomStatus.put(1, "예약가능");
+            roomStatus.put(1, "개별문의");
             roomStatus.put(2, "예약가능");
             roomStatus.put(3, "예약가능");
             // 특정 날짜의 예약 정보 조회

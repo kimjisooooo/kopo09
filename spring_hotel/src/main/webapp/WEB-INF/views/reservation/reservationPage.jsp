@@ -17,7 +17,7 @@
 				<th>날짜</th>
 				<th>VIP룸</th>
 				<th>일반룸</th>
-				<th>합리적인룸</th>
+				<th>얼리버드</th>
 			</tr>
 			<c:forEach var="entry" items="${reservationStatus}">
 				<tr>

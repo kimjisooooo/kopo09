@@ -44,9 +44,9 @@ class ReservationRepositoryTests {
 		ReservationForm reForm = new ReservationForm();
 		reForm.setUser(user);
 		reForm.setHotel(hotel);
-		reForm.setReservation_date(new Date());
-		reForm.setCheck_in_date(new Date());
-		reForm.setCheck_out_date(new Date());
+		reForm.setReservationDate(new Date());
+		reForm.setCheckInDate(new Date());
+		reForm.setCheckOutDate(new Date());
 		reForm.setComment("테스트 하는중");
 		reservationRepository.save(reForm);
 	}

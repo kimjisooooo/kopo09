@@ -18,9 +18,9 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
-@Entity
 public class Sosick {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
