@@ -11,4 +11,5 @@ import kr.ac.kopo09.ctc.spring.board.domain.User;
 @Repository
 public interface UserRepository  extends JpaRepository<User, Long>, UserRepositoryCustom{
 	Optional<User> findById(Long id);
+	User findByName(String name);
 }

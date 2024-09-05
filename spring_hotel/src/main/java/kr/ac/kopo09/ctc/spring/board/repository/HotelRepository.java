@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import kr.ac.kopo09.ctc.spring.board.domain.Hotel;
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long>{
-
+	Hotel findByType(int type);
 }
