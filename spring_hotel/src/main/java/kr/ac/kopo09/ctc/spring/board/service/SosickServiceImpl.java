@@ -2,6 +2,7 @@ package kr.ac.kopo09.ctc.spring.board.service;
 
 import kr.ac.kopo09.ctc.spring.board.domain.Sosick;
 import kr.ac.kopo09.ctc.spring.board.domain.Sosick_Comment;
+import kr.ac.kopo09.ctc.spring.board.dto.SosickCommentDto;
 import kr.ac.kopo09.ctc.spring.board.repository.SosickRepository;
 import kr.ac.kopo09.ctc.spring.board.repository.Sosick_CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,18 +89,32 @@ public class SosickServiceImpl implements SosickService {
 	}
 
 	@Override
-	public List<Sosick_Comment> getComments(int rootId) {
+	@Transactional
+	public List<SosickCommentDto> getSosickCommentDtosBySosickId(Long sosickId) {
 		// TODO Auto-generated method stub
-		return sosickCommentRepository.findBySosick_IdOrderByRelevelAscRecntAsc(rootId);
+		 List<Sosick_Comment> sosickComments = sosickCommentRepository.findBySosickId(sosickId);
+	     return convertCommentsToDto(sosickComments, null);
 	}
 
-	@Override
-	public Sosick_Comment addComment(int rootId, String content) {
-		Sosick sosick = sosickRepository.findById(rootId).orElse(null);
-		if (sosick != null) {
-			Sosick_Comment comment = new Sosick_Comment(content, sosick);
-			return sosickCommentRepository.save(comment);
-		}
-		return null;
-	}
+	private List<SosickCommentDto> convertCommentsToDto(List<Sosick_Comment> sosickComments, Long parentId) {
+	       List<SosickCommentDto> dtos = new ArrayList<>();
+
+	       for (Sosick_Comment comment : sosickComments) {
+	           if ((parentId == null && comment.getParentComment() == null) || 
+	               (parentId != null && comment.getParentComment() != null && comment.getParentComment().getId().equals(parentId))) {
+	        	   SosickCommentDto dto = new SosickCommentDto();
+	               dto.setId(comment.getId());
+	               dto.setContent(comment.getContent());
+	               dto.setUser_id(comment.getUser().getId());
+	               dto.setName(comment.getUser().getName());
+	               dto.setDepth(comment.getDepth()); // 깊이 설정
+	               // 재귀적으로 자식 댓글을 추가
+	               List<SosickCommentDto> childDtos = convertCommentsToDto(sosickComments, comment.getId());
+	               dtos.add(dto);
+	               dtos.addAll(childDtos);
+	           }
+	       }
+	       return dtos;
+	   }
+	
 }

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,22 +17,36 @@ public class Sosick_Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "sosick_id", nullable = false)
     private Sosick sosick;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    @Column
     private String content;
-    private Date date;
-    private int relevel;
-    private int recnt;
+    
+    // 부모 댓글 참조
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_comment_id", nullable = true)
+    private Sosick_Comment parentComment;
 
-    public Sosick_Comment(String content, Sosick sosick) {
-        this.content = content;
-        this.sosick = sosick;
-        this.date = new Date();  // 기본적으로 현재 날짜와 시간을 설정합니다.
-        this.relevel = 0;  // 기본값으로 설정할 수 있습니다.
-        this.recnt = 0;    // 기본값으로 설정할 수 있습니다.
-    }
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sosick_Comment> childComments = new ArrayList<>();
+
+    
+	 // 댓글 깊이 계산 메서드
+	    public int getDepth() {
+	        int depth = 0;
+	        Sosick_Comment current = this;
+	        while (current.getParentComment() != null) {
+	            depth++;
+	            current = current.getParentComment();
+	        }
+	        return depth;
+	    }
 }

@@ -30,7 +30,7 @@
 						<tr>
 							<td>${sosick.id}</td>
 							<td><a
-								href="${pageContext.request.contextPath}/sosick/view/${sosick.id}">${sosick.title}</a>
+								href="${pageContext.request.contextPath}/view/${sosick.id}">${sosick.title}</a>
 							</td>
 							<td><fmt:formatDate value="${sosick.date}"
 									pattern="yyyy-MM-dd" /></td>

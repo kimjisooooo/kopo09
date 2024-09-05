@@ -16,11 +16,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Sosick {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +39,7 @@ public class Sosick {
 	@JsonBackReference
 	private User userItem;
 
-    @OneToMany(mappedBy = "sosick", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sosick", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Sosick_Comment> comments;  // 정확한 타입 사용
 }
