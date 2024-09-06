@@ -35,7 +35,7 @@ $(function() {
 				</tr>
 				<tr>
 					<td>체크인 날짜</td>
-					<td><input type="text" name="date" value="<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />" id="datepicker"></td>
+					<td><input type="text" name="check_in_date" value="<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />" id="datepicker"></td>
 				</tr>
 				<tr>
 					<td>예약의 타입</td>
