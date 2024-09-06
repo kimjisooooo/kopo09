@@ -26,6 +26,7 @@
         td {
             font-size: 12px;
             text-align: center;
+            position: rerative;
         }
 
         a {
@@ -40,6 +41,7 @@
         a:active {
             color: #ff0000;
         }
+
     </style>
     <script type="text/javascript">
         var muCnt = 5;
@@ -92,8 +94,7 @@
                             <a href='c_03' target='_self'>온천</a>
                         </div>
                         <div id='menu3' style='display: none;'>
-                            <a href='d_01' target='_self'>예약상황</a> |
-                            <a href='d_01' target='_self'>예약하기</a> |
+                            <a href='d_01' target='_self'>예약상황&예약하기</a> |
                             <a href='d_02' target='_self'>관리자페이지</a> |
                             <a href='d_03' target='_self'>관리자로그아웃</a>
                         </div>

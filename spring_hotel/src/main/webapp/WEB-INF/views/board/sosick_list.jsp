@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="/WEB-INF/views/fragments/header.jsp"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
 						<tr>
 							<td>${sosick.id}</td>
 							<td><a
-								href="${pageContext.request.contextPath}/view/${sosick.id}">${sosick.title}</a>
+								href="${pageContext.request.contextPath}/view?id=${sosick.id}">${sosick.title}</a>
 							</td>
 							<td><fmt:formatDate value="${sosick.date}"
 									pattern="yyyy-MM-dd" /></td>

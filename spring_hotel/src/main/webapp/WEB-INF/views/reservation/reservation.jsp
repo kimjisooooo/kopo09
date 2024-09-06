@@ -6,14 +6,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  jQuery UI CSS파일  -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<!-- jQuery 기본 js파일 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- jQuery UI 라이브러리 js파일 -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <title>Insert title here</title>
 <script>
-	
+$(function() {
+    $("#datepicker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        minDate: 0, // 선택 가능한 날짜를 현재 날짜 이후로 제한
+        maxDate: 30
+    });
+});
 </script>
 </head>
 <body>
 	<center>
-		${date} <br> <br> ${roomType}
+	<tr>예약 정보</tr>
+<br> <br>
 		<form action="/try_reservation">
 			<table border="1">
 				<tr>
@@ -22,9 +35,7 @@
 				</tr>
 				<tr>
 					<td>체크인 날짜</td>
-					<td><input type="text" name="check_in_date"
-						placeholder="입력해주세요"
-						value="<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />"></td>
+					<td><input type="text" name="date" value="<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />" id="datepicker"></td>
 				</tr>
 				<tr>
 					<td>예약의 타입</td>

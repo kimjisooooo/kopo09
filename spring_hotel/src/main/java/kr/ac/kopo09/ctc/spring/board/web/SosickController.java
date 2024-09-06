@@ -63,9 +63,10 @@ public class SosickController {
 		return "/board/sosick_list";
 	}
 
-	@RequestMapping("/view/{id}")
-	public String view(@PathVariable Long id, Model model) {
+	@RequestMapping("/view")
+	public String view(@RequestParam(value = "id", required = false) Long id, Model model) {
 		int newid = (int) (long) id;
+		System.out.println(id);
 		Sosick sosickEntity = sosickService.selectOne(newid);
 		List<SosickCommentDto> sosickCommentDto = sosickService.getSosickCommentDtosBySosickId(id);
 //        for(int i = 0; i<sosickCommentDto.size(); i++) {
@@ -100,7 +101,7 @@ public class SosickController {
 		Sosick boardItem = sosickRepository.findById(articleId).orElse(null);
 		if (boardItem == null) {
 			rttr.addFlashAttribute("Message", "존재하지 않는 게시물입니다.");
-			return "redirect:/boards?id=" + articleId;
+			return "redirect:/view/"+articleId;
 		}
 		Sosick_Comment newComment = new Sosick_Comment();
 		newComment.setContent(content);
@@ -120,7 +121,7 @@ public class SosickController {
 			}
 		}
 		sosick_CommentRepository.save(newComment);
-		return "redirect:/boards?id=" + articleId;
+		return "redirect:/view/"+articleId;
 	}
 
 	@GetMapping("/sosick/new")
